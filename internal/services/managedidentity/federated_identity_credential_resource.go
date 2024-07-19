@@ -26,7 +26,7 @@ func (r FederatedIdentityCredentialResource) ModelObject() interface{} {
 }
 
 type FederatedIdentityCredentialResourceSchema struct {
-	Audience          []string `tfschema:"audience"`
+	Audiences         []string `tfschema:"audiences"`
 	Issuer            string   `tfschema:"issuer"`
 	Name              string   `tfschema:"name"`
 	ResourceGroupName string   `tfschema:"resource_group_name"`
@@ -44,7 +44,7 @@ func (r FederatedIdentityCredentialResource) ResourceType() string {
 
 func (r FederatedIdentityCredentialResource) Arguments() map[string]*pluginsdk.Schema {
 	return map[string]*pluginsdk.Schema{
-		"audience": {
+		"audiences": {
 			Elem: &pluginsdk.Schema{
 				Type: pluginsdk.TypeString,
 			},
@@ -200,13 +200,13 @@ func (r FederatedIdentityCredentialResource) Delete() sdk.ResourceFunc {
 }
 
 func (r FederatedIdentityCredentialResource) mapFederatedIdentityCredentialResourceSchemaToFederatedIdentityCredentialProperties(input FederatedIdentityCredentialResourceSchema, output *managedidentities.FederatedIdentityCredentialProperties) {
-	output.Audiences = input.Audience
+	output.Audiences = input.Audiences
 	output.Issuer = input.Issuer
 	output.Subject = input.Subject
 }
 
 func (r FederatedIdentityCredentialResource) mapFederatedIdentityCredentialPropertiesToFederatedIdentityCredentialResourceSchema(input managedidentities.FederatedIdentityCredentialProperties, output *FederatedIdentityCredentialResourceSchema) {
-	output.Audience = input.Audiences
+	output.Audiences = input.Audiences
 	output.Issuer = input.Issuer
 	output.Subject = input.Subject
 }
